@@ -12,5 +12,10 @@ class User < ApplicationRecord
      nickname: auth.info.name,
        email: auth.info.email
    )
- end
+  if user.persisted?
+      sns.user = user
+      sns.save
+    end
+    { user: user, sns: sns }
+  end
 end
